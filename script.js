@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // State
-    const TOTAL_QUESTIONS = 3;
+    const TOTAL_QUESTIONS = 4;
     let currentQuestionIndex = 0;
     let score = 0;
     let currentProblem = { n1: 0, n2: 0, ans: 0 };
@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const num1El = document.getElementById('num1');
     const num2El = document.getElementById('num2');
+    const operatorEl = document.getElementById('operator');
     const answerInput = document.getElementById('answer-input');
     const feedbackEl = document.getElementById('feedback-msg');
     const progressFill = document.getElementById('progress-fill');
@@ -117,14 +118,33 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Generate Problem (Single digit)
-        const n1 = Math.floor(Math.random() * 10);
-        const n2 = Math.floor(Math.random() * 10);
-        currentProblem = { n1, n2, ans: n1 + n2 };
+        // Generate Problem
+        let n1, n2, ans, operator;
+
+        if (currentQuestionIndex < 2) {
+            // Addition (First 2 questions)
+            n1 = Math.floor(Math.random() * 10);
+            n2 = Math.floor(Math.random() * 10);
+            ans = n1 + n2;
+            operator = '+';
+        } else {
+            // Subtraction (Last 2 questions)
+            // Ensure n1 >= n2 so result is non-negative
+            n1 = Math.floor(Math.random() * 10);
+            n2 = Math.floor(Math.random() * 10);
+            if (n1 < n2) {
+                [n1, n2] = [n2, n1]; // Swap
+            }
+            ans = n1 - n2;
+            operator = '-';
+        }
+
+        currentProblem = { n1, n2, ans };
 
         // Update UI
         num1El.textContent = n1;
         num2El.textContent = n2;
+        operatorEl.textContent = operator;
         answerInput.value = '';
         answerInput.focus();
         feedbackEl.textContent = '';
