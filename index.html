@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Addition Wiz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Yomogi&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Start Screen -->
+        <div id="start-screen" class="screen active">
+            <h1>たしざんマスター</h1>
+            <p>3問の計算問題にチャレンジ！</p>
+            <button id="start-btn" class="primary-btn">スタート</button>
+        </div>
+
+        <!-- Question Screen -->
+        <div id="question-screen" class="screen hidden">
+            <div class="progress-bar">
+                <div id="progress-fill"></div>
+            </div>
+            <div class="question-container">
+                <span id="num1">0</span>
+                <span class="operator">+</span>
+                <span id="num2">0</span>
+            </div>
+            <div class="input-area">
+                <input type="number" id="answer-input" placeholder="?" inputmode="numeric" autocomplete="off">
+                <button id="submit-btn" class="icon-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+            </div>
+            <p id="feedback-msg" class="feedback"></p>
+        </div>
+
+        <!-- Result Screen -->
+        <div id="result-screen" class="screen hidden">
+            <h2>結果発表</h2>
+            <div class="score-card">
+                <div class="score-circle">
+                    <span id="accuracy-text">0%</span>
+                </div>
+                <p>3問中 <span id="score-count">0</span> 問正解！</p>
+            </div>
+            <button id="restart-btn" class="secondary-btn">もう一度遊ぶ</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
